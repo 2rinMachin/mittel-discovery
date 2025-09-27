@@ -2,5 +2,5 @@ app/.venv/
 .venv/
 .env
 __pycache__/
-app/__pycache__
+app/__pycache__/
 *.pyc
