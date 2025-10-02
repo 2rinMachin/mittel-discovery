@@ -23,3 +23,8 @@ async def discover_recent(limit: int = 10, skip: int = 0):
 @router.get("/articles/tag/{tag}", response_model = List[Article])
 async def discover_articles_by_tag(tag: str, limit: int = 10, skip: int = 0):
     return await get_articles_by_tag(tag, limit, skip)
+
+@router.get("/articles/search}", response_model = List[Article])
+async def discover_articles_by_title(title: str, limit: int = 10, skip: int = 0):
+    if not title: return await get_recent_articles(limit, skip)
+    return await get_articles_by_title(title, limit, skip)

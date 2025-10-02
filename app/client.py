@@ -15,8 +15,11 @@ async def fetch_one_article(article_id: str):
             return resp.json()
         except httpx.HTTPStatusError as e:
             if e.response.status_code == 404: return None
+            raise
         
 
+# fetch to /articles/recent always is 200 OK
+# handled as [] in mittel-articles
 async def fetch_recent_articles(limit: int = 10, skip: int = 0):
     async with httpx.AsyncClient() as client:
         params = { "limit" : limit, "skip" : skip }
@@ -32,7 +35,9 @@ async def fetch_engagement(post_id: str):
             resp.raise_for_status()
             return resp.json()
         except httpx.HTTPStatusError as e:
-            if e.response.status_code == 404: return { "views" : 0, "likes" : 0, "shares" : 0 }
+            if e.response.status_code == 404: return None
+            elif e.response.status_code == 401: raise Exception("Unauthorized when fetching engagement")
+            raise
 
 async def fetch_user(user_id: str):
     async with httpx.AsyncClient() as client:
@@ -42,7 +47,10 @@ async def fetch_user(user_id: str):
             return resp.json()
         except httpx.HTTPStatusError as e:
             if e.response.status_code == 404: return None
+            raise
 
+# fetch to /articles/tag/{tag} always is 200 OK
+# handled as [] in mittel-articles
 async def fetch_articles_by_tag(tag: str, limit: int = 10, skip: int = 0):
     async with httpx.AsyncClient() as client:
         params = { "limit" : limit, "skip" : skip }

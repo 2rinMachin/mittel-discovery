@@ -2,10 +2,10 @@ from pydantic import BaseModel
 from typing import Optional
 
 class EngagementSummary(BaseModel):
-    views: int
-    likes: int
-    shares: int
-    score: Optional[int] = None
+    views: int = 0
+    likes: int = 0
+    shares: int = 0
+    score: int = 0
 
 class Article(BaseModel):
     post_id: str
