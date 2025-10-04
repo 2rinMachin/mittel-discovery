@@ -30,10 +30,15 @@ async def discover_articles_by_title(title: str, limit: int = 10, skip: int = 0)
 async def discover_comments_for_post(post_id: str, limit: int = 10, skip: int = 0):
     return await get_comments_for_post(post_id, limit, skip)
 
-# WIP
 @router.get("/users/{user_id}", response_model = User)
-async def discover_user(user_id: str):
+async def discover_user_by_id(user_id: str):
     user = await get_user_by_id(user_id)
+    if not user: raise HTTPException(status_code = 404, detail = "User not found")
+    return user
+
+@router.get("/users/name/{user_username}", response_model = User)
+async def discover_user_by_username(user_username: str):
+    user = await get_user_by_username(user_username)
     if not user: raise HTTPException(status_code = 404, detail = "User not found")
     return user
 

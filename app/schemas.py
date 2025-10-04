@@ -10,8 +10,7 @@ class EngagementSummary(BaseModel):
 
 class Author(BaseModel):
     id: str
-    firstName: str
-    lastName: str
+    username: str
     email: str
 
 class Article(BaseModel):
@@ -30,9 +29,9 @@ class Article(BaseModel):
 
 # WIP, not complete yet!
 class User(BaseModel):
-    id: int
+    id: str
     email: str
-    first_name: Optional[str] = None
+    username: Optional[str] = None
 
 # note: author_id does not correspond with User.id
 class Comment(BaseModel):

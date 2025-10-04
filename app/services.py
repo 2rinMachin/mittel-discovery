@@ -61,8 +61,12 @@ async def get_comments_for_post(post_id: str, limit: int = 10, skip: int = 0):
     for comment in comments_data: res_comments.append(Comment.model_validate(comment))
     return res_comments
 
-# WIP
 async def get_user_by_id(user_id: str):
-    user_data = await client.fetch_user(user_id)
+    user_data = await client.fetch_user_by_id(user_id)
+    if not user_data: return None
+    return User.model_validate(user_data)
+
+async def get_user_by_username(user_username: str):
+    user_data = await client.fetch_user_by_username(user_username)
     if not user_data: return None
     return User.model_validate(user_data)

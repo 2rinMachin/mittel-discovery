@@ -26,7 +26,7 @@ async def fetch_engagement(post_id: str | None = None, user_id: str | None = Non
 async def fetch_recent_articles(limit: int = 10, skip: int = 0):
     async with httpx.AsyncClient() as client:
         params = { "limit" : limit, "skip" : skip }
-        resp = await client.get(f"{BASE_URL_ARTICLES}/articles/search", params = params)
+        resp = await client.get(f"{BASE_URL_ARTICLES}/articles", params = params)
         resp.raise_for_status()
         return resp.json()
 
@@ -45,7 +45,7 @@ async def fetch_one_article(article_id: str):
 async def fetch_articles_by_tag(tag: str, limit: int = 10, skip: int = 0):
     async with httpx.AsyncClient() as client:
         params = { "tag" : tag, "limit" : limit, "skip" : skip }
-        resp = await client.get(f"{BASE_URL_ARTICLES}/articles/search", params = params)
+        resp = await client.get(f"{BASE_URL_ARTICLES}/articles", params = params)
         resp.raise_for_status()
         return resp.json()
 
@@ -54,7 +54,7 @@ async def fetch_articles_by_tag(tag: str, limit: int = 10, skip: int = 0):
 async def fetch_articles_by_title(title: str, limit: int = 10, skip: int = 0):
     async with httpx.AsyncClient() as client:
         params = { "title" : title, "limit" : limit, "skip" : skip }
-        resp = await client.get(f"{BASE_URL_ARTICLES}/articles/search", params = params)
+        resp = await client.get(f"{BASE_URL_ARTICLES}/articles", params = params)
         resp.raise_for_status()
         return resp.json()
 
@@ -65,14 +65,22 @@ async def fetch_comments_by_post(post_id: str, limit: int = 10, skip: int = 0):
         resp.raise_for_status()
         return resp.json()
 
-# WIP
-async def fetch_user(user_id: str):
+async def fetch_user_by_id(user_id: str):
     async with httpx.AsyncClient() as client:
         try: 
             resp = await client.get(f"{BASE_URL_AUTH}/users/{user_id}")
             resp.raise_for_status()
             return resp.json()
         except httpx.HTTPStatusError as e:
-            if e.response.status_code == 404: return None
+            if e.response.status_code == 404 or e.response.status_code == 400: return None
             raise
 
+async def fetch_user_by_username(user_username: str):
+    async with httpx.AsyncClient() as client:
+        try: 
+            resp = await client.get(f"{BASE_URL_AUTH}/users/by_username/{user_username}")
+            resp.raise_for_status()
+            return resp.json()
+        except httpx.HTTPStatusError as e:
+            if e.response.status_code == 404 or e.response.status_code == 400: return None
+            raise
