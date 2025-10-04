@@ -1,5 +1,6 @@
-from pydantic import BaseModel
-from typing import Optional
+import datetime
+from pydantic import BaseModel, Field
+from typing import Optional, List
 
 class EngagementSummary(BaseModel):
     views: int = 0
@@ -7,14 +8,39 @@ class EngagementSummary(BaseModel):
     shares: int = 0
     score: int = 0
 
+class Author(BaseModel):
+    id: str
+    firstName: str
+    lastName: str
+    email: str
+
 class Article(BaseModel):
-    post_id: str
+    id: str = Field(alias = "_id")
     title: str
     content: Optional[str] = None
-    author_id: str
+    tags: List[str]
+    author: Author
+    commentsCount: int
+    createdAt: Optional[str] = None
+    updatedAt: Optional[str] = None
     engagement: Optional[EngagementSummary] = None
 
+    class Config:
+        extra = "ignore"
+
+# WIP, not complete yet!
 class User(BaseModel):
     id: int
     email: str
     first_name: Optional[str] = None
+
+# note: author_id does not correspond with User.id
+class Comment(BaseModel):
+    id: str = Field(alias = "_id")
+    postId: str
+    content: str
+    author: Author
+    createdAt: Optional[str]
+    updatedAt: Optional[str]
+
+

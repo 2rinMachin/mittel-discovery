@@ -8,9 +8,9 @@ app = FastAPI()
 app.include_router(routes.router)
 
 # simple internal server error handler
-@app.exception_handler(Exception)
-async def general_exception_handler(request: Request, e: Exception):
-    return JSONResponse(
-        status_code = 500,
-        content = { "error" : "Internal server error" }
-    )
+# @app.exception_handler(Exception)
+# async def general_exception_handler(request: Request, e: Exception):
+#     return JSONResponse(
+#         status_code = 500,
+#         content = { "error" : "Internal server error" }
+#     )
