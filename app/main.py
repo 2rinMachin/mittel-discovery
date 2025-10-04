@@ -3,7 +3,15 @@ from fastapi.responses import JSONResponse
 from app import routes
 import httpx
 
-app = FastAPI()
+app = FastAPI(
+    title="Mittel Discovery",
+    description="""User and article searching microservice for Mittel""",
+    version="1.0.0",
+    contact={
+        "name": "2RinMachin",
+        "url": "https://github.com/2rinMachin",
+    },
+)
 
 app.include_router(routes.router)
 
