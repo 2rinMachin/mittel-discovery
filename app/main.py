@@ -1,7 +1,6 @@
-from fastapi import FastAPI, Request
-from fastapi.responses import JSONResponse
+from fastapi import FastAPI
 from app import routes
-import httpx
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
     title="Mittel Discovery",
@@ -11,6 +10,14 @@ app = FastAPI(
         "name": "2RinMachin",
         "url": "https://github.com/2rinMachin",
     },
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 app.include_router(routes.router)
