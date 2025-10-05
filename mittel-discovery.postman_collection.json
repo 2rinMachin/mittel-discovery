@@ -1,0 +1,218 @@
+{
+	"info": {
+		"_postman_id": "8f1d53dd-9221-40d1-ba8d-99317bf93992",
+		"name": "mittel-discovery",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43564117"
+	},
+	"item": [
+		{
+			"name": "get_echo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{BASE_URL_DISCOVERY}}/",
+					"protocol": "http",
+					"host": [
+						"{{BASE_URL_DISCOVERY}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_recent_articles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{BASE_URL_DISCOVERY}}/discover/articles/recent",
+					"protocol": "http",
+					"host": [
+						"{{BASE_URL_DISCOVERY}}"
+					],
+					"path": [
+						"discover",
+						"articles",
+						"recent"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_featured_articles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{BASE_URL_DISCOVERY}}/discover/articles/featured",
+					"protocol": "http",
+					"host": [
+						"{{BASE_URL_DISCOVERY}}"
+					],
+					"path": [
+						"discover",
+						"articles",
+						"featured"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_article_by_id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{BASE_URL_DISCOVERY}}/discover/articles/68e15014bfaa47124bce5f48",
+					"protocol": "http",
+					"host": [
+						"{{BASE_URL_DISCOVERY}}"
+					],
+					"path": [
+						"discover",
+						"articles",
+						"68e15014bfaa47124bce5f48"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_articles_by_tag",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{BASE_URL_DISCOVERY}}/discover/articles/tag/{{TAG}}",
+					"protocol": "http",
+					"host": [
+						"{{BASE_URL_DISCOVERY}}"
+					],
+					"path": [
+						"discover",
+						"articles",
+						"tag",
+						"{{TAG}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_articles_by_title",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{BASE_URL_DISCOVERY}}/discover/articles/title/{{TITLE}}",
+					"protocol": "http",
+					"host": [
+						"{{BASE_URL_DISCOVERY}}"
+					],
+					"path": [
+						"discover",
+						"articles",
+						"title",
+						"{{TITLE}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_article_comments_by_id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{BASE_URL_DISCOVERY}}/discover/comments/{{ARTICLE_ID}}",
+					"protocol": "http",
+					"host": [
+						"{{BASE_URL_DISCOVERY}}"
+					],
+					"path": [
+						"discover",
+						"comments",
+						"{{ARTICLE_ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_user_by_id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{BASE_URL_DISCOVERY}}/discover/users/{{USERS_ID}}",
+					"protocol": "http",
+					"host": [
+						"{{BASE_URL_DISCOVERY}}"
+					],
+					"path": [
+						"discover",
+						"users",
+						"{{USERS_ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_user_by_username",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{BASE_URL_DISCOVERY}}/discover/users/name/{{USERNAME}}",
+					"protocol": "http",
+					"host": [
+						"{{BASE_URL_DISCOVERY}}"
+					],
+					"path": [
+						"discover",
+						"users",
+						"name",
+						"{{USERNAME}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL_DISCOVERY",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "ARTICLE_ID",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "TAG",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "TITLE",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "USERS_ID",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
