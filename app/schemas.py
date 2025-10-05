@@ -25,7 +25,9 @@ class Article(BaseModel):
     engagement: Optional[EngagementSummary] = None
 
     class Config:
-        extra = "ignore"
+        extra = "ignore" # ignores all other fields
+        populate_by_name = True # allows importing both _id and id!
+        validate_by_name = True # allows exporting only id!
 
 # WIP, not complete yet!
 class User(BaseModel):

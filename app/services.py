@@ -1,5 +1,5 @@
 from . import client
-from .schemas import Article, Comment, EngagementSummary, User
+from .schemas import *
 
 async def get_article_engagement(article: Article):
     events_data = await client.fetch_engagement(article.id)
@@ -19,12 +19,16 @@ async def get_article_engagement(article: Article):
     return article
 
 async def get_recent_articles(limit: int = 10, skip: int = 0):
-    articles_data = await client.fetch_recent_articles(limit, skip)
-    if not articles_data: return []
+    feed_articles_data = await client.fetch_recent_articles(limit, skip);
+    if not feed_articles_data: return []
+    ids = []
+    raw_data = []
     res_articles = []
-    for article in articles_data:
-       res_articles.append(await get_article_engagement(Article.model_validate(article)))
+    for feed_article in feed_articles_data: ids.append(feed_article["_id"])
+    for id in ids: raw_data.append(await get_article_by_id(id))
+    for raw in raw_data: res_articles.append(await get_article_engagement(Article.model_validate(raw)))
     return res_articles
+
 
 async def get_featured_articles(limit: int = 10, skip: int = 0):
     res_articles = await get_recent_articles(limit, skip)
