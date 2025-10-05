@@ -213,6 +213,11 @@
 			"key": "USERS_ID",
 			"value": "",
 			"type": "default"
+		},
+		{
+			"key": "USERNAME",
+			"value": "",
+			"type": "default"
 		}
 	]
 }
