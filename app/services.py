@@ -2,17 +2,7 @@ from . import client
 from .schemas import *
 
 async def get_article_engagement(article: Article):
-    events_data = await client.fetch_engagement(article.id)
-    engagement_data = { "views": 0, "likes": 0, "shares": 0 }
-    if not events_data:
-        article.engagement = EngagementSummary.model_validate(engagement_data)
-        return article
-
-    for event in events_data:
-        if event["kind"] == "view": engagement_data["views"] += 1
-        elif event["kind"] == "like": engagement_data["likes"] += 1
-        elif event["kind"] == "share": engagement_data["shares"] += 1
-
+    engagement_data = await client.fetch_engagement(article.id)
     summary = EngagementSummary.model_validate(engagement_data)
     summary.score = 5*summary.shares + 2*summary.likes + summary.views
     article.engagement = summary

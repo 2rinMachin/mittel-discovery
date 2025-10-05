@@ -7,19 +7,14 @@ BASE_URL_AUTH = os.getenv("BASE_URL_AUTH")
 BASE_URL_ARTICLES = os.getenv("BASE_URL_ARTICLES")
 BASE_URL_ENGAGEMENT = os.getenv("BASE_URL_ENGAGEMENT")
 
-async def fetch_engagement(post_id: str | None = None, user_id: str | None = None):
+
+# fetch to /events/{event_id} always is 200 OK
+# handled as [] in mittel-articles
+async def fetch_engagement(post_id: str | None = None):
     async with httpx.AsyncClient() as client:
-        params = { }
-        if post_id: params["post_id"] = post_id
-        if user_id: params["user_id"] = user_id
-        try: 
-            resp = await client.get(f"{BASE_URL_ENGAGEMENT}/events", params = params, headers={"X-Internal-Token": "123456"})
-            resp.raise_for_status()
-            return resp.json()
-        except httpx.HTTPStatusError as e:
-            if e.response.status_code == 404: return None
-            elif e.response.status_code == 401: raise Exception("Unauthorized when fetching engagement")
-            raise
+        resp = await client.get(f"{BASE_URL_ENGAGEMENT}/events/{post_id}")
+        resp.raise_for_status()
+        return resp.json()
 
 # fetch to /articles/recent always is 200 OK
 # handled as [] in mittel-articles
