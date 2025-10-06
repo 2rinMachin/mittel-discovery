@@ -7,7 +7,6 @@ BASE_URL_AUTH = os.getenv("BASE_URL_AUTH")
 BASE_URL_ARTICLES = os.getenv("BASE_URL_ARTICLES")
 BASE_URL_ENGAGEMENT = os.getenv("BASE_URL_ENGAGEMENT")
 
-
 # fetch to /events/{event_id} always is 200 OK
 # handled as [] in mittel-articles
 async def fetch_engagement(post_id: str | None = None):
@@ -21,6 +20,13 @@ async def fetch_engagement(post_id: str | None = None):
 async def fetch_recent_articles(limit: int = 10, skip: int = 0):
     async with httpx.AsyncClient() as client:
         params = { "limit" : limit, "skip" : skip }
+        resp = await client.get(f"{BASE_URL_ARTICLES}/articles", params = params)
+        resp.raise_for_status()
+        return resp.json()
+
+async def fetch_articles_by_author(author_id: str, limit: int = 10, skip: int = 0):
+    async with httpx.AsyncClient() as client:
+        params = { "authorId" : author_id, "limit" : limit, "skip" : skip }
         resp = await client.get(f"{BASE_URL_ARTICLES}/articles", params = params)
         resp.raise_for_status()
         return resp.json()

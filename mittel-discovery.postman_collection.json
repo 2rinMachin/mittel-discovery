@@ -70,7 +70,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{BASE_URL_DISCOVERY}}/discover/articles/68e15014bfaa47124bce5f48",
+					"raw": "http://{{BASE_URL_DISCOVERY}}/discover/articles/{{ARTICLE_ID}}",
 					"protocol": "http",
 					"host": [
 						"{{BASE_URL_DISCOVERY}}"
@@ -78,7 +78,7 @@
 					"path": [
 						"discover",
 						"articles",
-						"68e15014bfaa47124bce5f48"
+						"{{ARTICLE_ID}}"
 					]
 				}
 			},
@@ -182,6 +182,25 @@
 						"users",
 						"name",
 						"{{USERNAME}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_ranked_authors",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{BASE_URL_DISCOVERY}}/discover/authors",
+					"protocol": "http",
+					"host": [
+						"{{BASE_URL_DISCOVERY}}"
+					],
+					"path": [
+						"discover",
+						"authors"
 					]
 				}
 			},

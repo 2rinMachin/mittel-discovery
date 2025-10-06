@@ -13,6 +13,11 @@ class Author(BaseModel):
     username: str
     email: str
 
+class AuthorScore(BaseModel):
+    id: str
+    username: str
+    score: int = 0
+
 class Article(BaseModel):
     id: str = Field(alias = "_id")
     title: str
@@ -28,12 +33,6 @@ class Article(BaseModel):
         extra = "ignore" # ignores all other fields
         populate_by_name = True # allows importing both _id and id!
         validate_by_name = True # allows exporting only id!
-
-# WIP, not complete yet!
-class User(BaseModel):
-    id: str
-    email: str
-    username: Optional[str] = None
 
 # note: author_id does not correspond with User.id
 class Comment(BaseModel):

@@ -26,4 +26,5 @@ Este microservicio no tiene una base de datos asociada, porque está diseñado p
 | GET | `/discover/comments/{article_id}` | mittel-articles | Devuelve todo comentario de un artículo dado. |
 | GET | `/discover/users/{user_id}` | mittel-users | Devuelve la información de un usuario por `id`. |
 | GET | `/discover/users/{username}` | mittel-users | Devuelve la información de un usuario por `username`. |
+| GET | `/discover/authors` | mittel-articles, mittel-engagement, mittel-users | Devuelve un ranking de todos los autores de acuerdo a la suma del `score` de cada uno de sus artículos. |
 

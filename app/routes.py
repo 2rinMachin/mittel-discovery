@@ -30,17 +30,21 @@ async def discover_articles_by_title(title: str, limit: int = 10, skip: int = 0)
 async def discover_comments_for_post(post_id: str, limit: int = 10, skip: int = 0):
     return await get_comments_for_post(post_id, limit, skip)
 
-@router.get("/discover/users/{user_id}", response_model = User)
+@router.get("/discover/users/{user_id}", response_model = Author)
 async def discover_user_by_id(user_id: str):
     user = await get_user_by_id(user_id)
     if not user: raise HTTPException(status_code = 404, detail = "User not found")
     return user
 
-@router.get("/discover/users/name/{user_username}", response_model = User)
+@router.get("/discover/users/name/{user_username}", response_model = Author)
 async def discover_user_by_username(user_username: str):
     user = await get_user_by_username(user_username)
     if not user: raise HTTPException(status_code = 404, detail = "User not found")
     return user
+
+@router.get("/discover/authors", response_model = List[AuthorScore])
+async def discover_authors():
+    return await get_ranked_authors()
 
 @router.get("/")
 async def hello_world():
